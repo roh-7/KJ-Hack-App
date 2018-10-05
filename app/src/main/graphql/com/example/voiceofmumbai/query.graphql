@@ -1,0 +1,6 @@
+ query FeedType($limit: Int!){
+    profiles(where: {id: {_eq: $limit}}){
+      id
+      name
+    }
+  }
