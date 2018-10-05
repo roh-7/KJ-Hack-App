@@ -8,4 +8,12 @@
         <item name = "colorAccent">@color/colorAccent</item>
     </style>
 
+	<style name = "NoActionBar" parent = "android:Theme.DeviceDefault.Light.Dialog.NoActionBar">
+		<item name = "android:windowActionBar">false</item>
+        <item name = "android:windowNoTitle">true</item>
+		<item name = "android:colorPrimary">@color/yellow_600</item>
+		<item name = "android:colorPrimaryDark">@color/yellow_700</item>
+		<item name = "android:colorAccent">@color/orange_A200</item>
+	</style>
+	
 </resources>
