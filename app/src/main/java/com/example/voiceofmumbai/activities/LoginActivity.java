@@ -49,7 +49,8 @@ public class LoginActivity extends AppCompatActivity
 		});
 
 		// FIXME Login Later, Starting FeedActivity directly
-//		startActivity(new Intent(this, FeedActivity.class));
+		startActivity(new Intent(this, FeedActivity.class));
+
 	}
 
 	private void verifyOtp(String phoneNumber)
