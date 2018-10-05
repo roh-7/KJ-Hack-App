@@ -9,8 +9,9 @@ import com.apollographql.apollo.ApolloCall;
 import com.apollographql.apollo.ApolloClient;
 import com.apollographql.apollo.api.Response;
 import com.apollographql.apollo.exception.ApolloException;
-import com.example.voiceofmumbai.FeedTypeQuery;
+import com.example.graphql.FeedTypeQuery;
 import com.example.voiceofmumbai.R;
+import com.example.voiceofmumbai.utils.Constants;
 
 import javax.annotation.Nonnull;
 
@@ -34,27 +35,28 @@ public class LoginActivity extends AppCompatActivity
 
 		apolloClient = ApolloClient.builder()
 				.okHttpClient(okHttpClient)
-				.serverUrl(BASE_URL)
+				.serverUrl(Constants.BASE_URL)
 				.build();
 
 		apolloClient.query(
 				FeedTypeQuery.builder()
-				.limit(5)
-				.build()
-		).enqueue(new ApolloCall.Callback<FeedTypeQuery.Data>() {
+						.limit(5)
+						.build()
+		).enqueue(new ApolloCall.Callback<FeedTypeQuery.Data>()
+		{
 			@Override
 			public void onResponse(@Nonnull Response<FeedTypeQuery.Data> response)
 			{
 				final StringBuffer buffer = new StringBuffer();
-				assert response.data()!=null;
-				for(FeedTypeQuery.Profile profile : response.data().profiles())
+				assert response.data() != null;
+				for (FeedTypeQuery.Profile profile : response.data().profiles())
 				{
 					buffer.append(" id: ");
 					buffer.append(profile.id());
 					buffer.append(" name: ");
 					buffer.append(profile.name());
 					buffer.append("\n\n");
-					Log.v("response",buffer.toString());
+					Log.v("response", buffer.toString());
 				}
 			}
 
@@ -62,7 +64,7 @@ public class LoginActivity extends AppCompatActivity
 			public void onFailure(@Nonnull ApolloException e)
 			{
 				e.printStackTrace();
-				Log.v("error","onFailure");
+				Log.v("error", "onFailure");
 			}
 		});
 
