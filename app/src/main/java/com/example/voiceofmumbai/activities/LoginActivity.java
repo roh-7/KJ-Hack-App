@@ -1,5 +1,6 @@
 package com.example.voiceofmumbai.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -65,5 +66,7 @@ public class LoginActivity extends AppCompatActivity
 			}
 		});
 
+		// FIXME Login Later, Starting FeedActivity directly
+		startActivity(new Intent(this, FeedActivity.class));
 	}
 }
