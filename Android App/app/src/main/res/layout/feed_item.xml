@@ -6,6 +6,15 @@
  android:layout_height = "wrap_content"
  android:padding = "8dp">
 
+	<ImageView
+	 android:layout_width = "32dp"
+	 android:layout_height = "32dp"
+	 app:layout_constraintStart_toStartOf="parent"
+	 android:id="@+id/feed_status"
+	 android:src="@drawable/ic_error_black_24dp"
+	 android:layout_marginEnd="12dp"
+	 />
+	
     <ImageView
      android:id = "@+id/feed_profile_image_view"
      android:layout_width = "60dp"
@@ -21,7 +30,9 @@
      android:text = "Anonymous"
      android:textSize = "16sp"
      android:textStyle = "bold"
-     app:layout_constraintStart_toEndOf = "@id/feed_profile_image_view" />
+     app:layout_constraintTop_toTopOf="parent"
+     app:layout_constraintBottom_toBottomOf="@id/feed_status"
+     app:layout_constraintStart_toEndOf = "@id/feed_status" />
 
     <TextView
      android:layout_width = "wrap_content"
@@ -30,20 +41,25 @@
      android:layout_marginStart = "8dp"
      android:layout_marginTop = "4dp"
      android:text = "2 hours ago"
+     android:visibility="gone"
      android:textStyle = "italic"
      app:layout_constraintStart_toEndOf = "@id/feed_profile_image_view"
      app:layout_constraintTop_toBottomOf = "@id/feed_profile_name_text" />
     
     <TextView
      android:id = "@+id/feed_title"
-     android:layout_width = "match_parent"
+     android:layout_width = "0dp"
+     android:layout_marginStart="4dp"
      android:layout_height = "wrap_content"
      android:layout_marginTop = "4dp"
      android:maxLength = "150"
      android:padding = "4dp"
      android:text = "@string/lorem_ipsum"
      android:textSize = "16sp"
-     app:layout_constraintTop_toBottomOf = "@id/feed_time"
+     app:layout_constraintBottom_toTopOf="@id/seperator"
+     app:layout_constraintStart_toEndOf="@id/feed_status"
+ 	app:layout_constraintTop_toBottomOf="@id/feed_status"
+     app:layout_constraintEnd_toEndOf="parent"
      />
 
     <ImageView
@@ -101,9 +117,11 @@
     </LinearLayout>
     
     <View
+     android:id="@+id/seperator"
      android:layout_width = "match_parent"
      android:layout_height = "1dp"
+     android:layout_marginTop="4dp"
      android:background = "@color/grey_500"
-     app:layout_constraintTop_toBottomOf = "@id/feed_image" />
+     app:layout_constraintTop_toBottomOf = "@id/feed_title" />
     
 </android.support.constraint.ConstraintLayout>

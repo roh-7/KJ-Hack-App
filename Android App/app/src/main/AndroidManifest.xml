@@ -17,16 +17,20 @@
      android:theme = "@style/AppTheme">
         <activity
          android:name = ".activities.LoginActivity"
-         android:theme = "@style/NoActionBar">
+         android:theme = "@style/NoActionBar"
+         android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name = "android.intent.action.MAIN" />
 
                 <category android:name = "android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name = ".activities.FeedActivity" />
-        <activity android:name = ".activities.FeedItemDetailsActivity" />
-        <activity android:name = ".activities.IssueCreationActivity">
+        <activity android:name = ".activities.FeedActivity"
+         android:screenOrientation="portrait"/>
+        <activity android:name = ".activities.FeedItemDetailsActivity"
+         android:screenOrientation="portrait"/>
+        <activity android:name = ".activities.IssueCreationActivity"
+         android:screenOrientation="portrait">
         </activity>
     </application>
 

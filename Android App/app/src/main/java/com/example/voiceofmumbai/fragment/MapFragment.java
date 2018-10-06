@@ -43,7 +43,9 @@ import com.example.voiceofmumbai.utils.UtilityMethods;
 import com.mapfit.android.MapView;
 import com.mapfit.android.MapfitMap;
 import com.mapfit.android.OnMapReadyCallback;
+import com.mapfit.android.annotations.Marker;
 import com.mapfit.android.annotations.MarkerOptions;
+import com.mapfit.android.annotations.callback.OnMarkerAddedCallback;
 import com.mapfit.android.geocoder.Geocoder;
 import com.mapfit.android.geocoder.GeocoderCallback;
 import com.mapfit.android.geocoder.model.Address;
@@ -211,6 +213,7 @@ public class MapFragment extends Fragment
 										@Override
 										public void onResponse(JSONObject response)
 										{
+											feeds.clear();
 											Log.d("LULZ", response.toString());
 											JSONArray postArray = response.optJSONArray("post");
 											for(int i = 0; i < postArray.length(); i++) {
@@ -227,12 +230,30 @@ public class MapFragment extends Fragment
 														postObject.optString("timestamp"),
 														postObject.optString("user_name"),
 														postObject.optDouble("location_lat"),
-														postObject.optDouble("location_log")
+														postObject.optDouble("location_long")
 
 														);
 												Log.d("LULZ", item.getCategory());
 												feeds.add(item);
-												MapFragment.this.mapfitMap.addMarker(new MarkerOptions().position(new LatLng(item.getLocation_lat(), item.getLocation_long())));
+												Log.d("LULZW", item.getLocation_lat() + "-_-" + item.getLocation_long());
+												LatLng l1 = new LatLng(item.getLocation_lat(), item.getLocation_long());
+												Log.d("LULZ", l1.getLat() + "::" + l1.getLng());
+												LatLng l = new LatLng(19.0827, 72.9184);
+												MarkerOptions options = new MarkerOptions().position(l);
+												MapFragment.this.mapfitMap.addMarker(options, new OnMarkerAddedCallback() {
+													@Override
+													public void onMarkerAdded(Marker marker)
+													{
+														Log.d("LULZ", "Marker added re");
+													}
+
+													@Override
+													public void onError(Exception e)
+													{
+														Log.d("LULZ", e.getMessage() + "eXceptioon");
+														e.printStackTrace();
+													}
+												});
 											}
 											onAPISuccess();
 											Log.d("LULZ", "Success " + feeds.size());

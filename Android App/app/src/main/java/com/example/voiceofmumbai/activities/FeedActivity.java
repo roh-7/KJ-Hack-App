@@ -36,6 +36,7 @@ public class FeedActivity extends AppCompatActivity implements BottomNavigationV
         toolbarExtensionText = toolbar.findViewById(R.id.toolbar_title_extension);
         toolbarLocalityText = toolbar.findViewById(R.id.toolbar_title_locality);
         bottomBar.setOnNavigationItemSelectedListener(this);
+	    getSupportFragmentManager().beginTransaction().replace(R.id.container,new FeedFragment()).commit();
     }
 
     public void setLocality(String locality) {
