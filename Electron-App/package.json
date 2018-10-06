@@ -1,0 +1,30 @@
+{
+  "name": "lets-rule",
+  "version": "0.1.0",
+  "description": "lets rule in kj hack",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CCAtAlvis/kj-lets-rule.git"
+  },
+  "keywords": [
+    "hehe"
+  ],
+  "author": "Chinmay \"CCAtAlvis\" Chandak",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/CCAtAlvis/kj-lets-rule/issues"
+  },
+  "homepage": "https://github.com/CCAtAlvis/kj-lets-rule#readme",
+  "dependencies": {
+    "electron": "^3.0.2",
+    "graphql-request": "^1.8.2",
+    "jquery": "^3.3.1"
+  },
+  "devDependencies": {
+    "electron-packager": "^12.2.0"
+  }
+}

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title> Voice of Mumbai </title>
+
+  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+  <link rel="stylesheet" href="./css/bootstrap.min.css">
+
+  <link rel="stylesheet" href="./css/index.css">
+
+</head>
+<body>
+
+<div id="login-div"><br><br><br><br><br><br><br><br><br><br><br><br>
+  <form onsubmit="loginUser(event)"><center>
+    UserName:<br>
+    <input type="text" id="username" name="username"><br>
+    Password:<br>
+    <input type="password" id="password" name="password">
+    <br>
+    <input type="submit" value="Login"></center>
+  </form>
+</div>
+
+<div id="main-page-div">    
+    <nav class="navbar navbar-inverse">
+      <div class="container-fluid">  
+        <ul class="nav navbar-nav">
+          <li class="active" id="recent"><a href="#">Recent</a></li>
+          <li id="trending"><a href="#">Trending</a></li>
+          <li id="create"><a href="#">Create</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <!-- <li>
+            <select >
+              <option value="Unseen">Unseen</option>
+              <option value="Accepted">Accepted</option>
+              <option value="Processing">Processing</option>
+              <option value="Solved">Solved</option>
+            </select>
+          </li>   -->
+          <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+        </ul>
+      </div>
+    </nav>
+
+  <div class="container">
+
+    <!-- start of card -->
+    <div class="card">
+      <div class="image-box"></div>
+    
+      <div class="text">
+        <div class="top">
+          <div class="left">
+            <div class="title">Title</div>
+            <div class="description">Description</div>
+          </div>
+          
+          <div class="right">
+            <div class="upvotes">Upvotes:100</div>
+            <div class="time">Time stamp:xyz</div>
+            <div class="location"> Location:xyz </div>  
+          </div>
+        </div>
+
+        <div class="middle">
+          <div class="status-bar">
+            <button type="button" class="btn btn-warning">Registered</button>
+            <button type="button" class="btn btn-success" style="float:right;">Solved</button>
+            <div class="progress-bar-my">
+              <div class="progress progress-0"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- <div class="bottom">
+          <div class="delete">
+            <button type="button" class="btn btn-danger">Delete</button>
+          </div>
+        </div> -->
+
+      </div>
+    </div>
+    <!-- end of card -->
+
+  </div>
+</div>
+  
+<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
+<script src="./js/index.js"></script>
+<!-- <script src="./js/bootstrap.min.js"></script> -->
+
+</body>
+</html>
