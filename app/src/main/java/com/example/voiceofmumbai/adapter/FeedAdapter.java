@@ -1,6 +1,7 @@
 package com.example.voiceofmumbai.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -55,6 +56,12 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder>
 			user_name = itemView.findViewById(R.id.feed_profile_name_text);
 			title = itemView.findViewById(R.id.feed_title);
 			time = itemView.findViewById(R.id.feed_time);
+			itemView.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View view) {
+//					Intent intent = new Intent(context, );
+				}
+			});
 		}
 	}
 }
