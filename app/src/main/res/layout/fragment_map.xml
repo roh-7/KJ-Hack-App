@@ -1,18 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<android.support.design.widget.CoordinatorLayout
  xmlns:android = "http://schemas.android.com/apk/res/android"
  android:layout_width = "match_parent"
- android:layout_height = "match_parent">
+ android:layout_height = "match_parent" xmlns:app = "http://schemas.android.com/apk/res-auto">
 
     <com.mapfit.android.MapView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/mapView" />
 
-    <android.support.constraint.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    <android.support.v4.widget.NestedScrollView
+     android:id="@+id/feed_sheet"
+     android:elevation="8dp"
+     android:background="#fafafa"
+     android:layout_width = "match_parent"
+     android:layout_height = "wrap_content"
+     app:layout_behavior="@string/bottom_sheet_behavior"
+     app:behavior_peekHeight="80dp"
+     app:behavior_hideable="false">
+        
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            
+            <ImageView
+             android:layout_width = "wrap_content" android:layout_height = "wrap_content"
+             android:src="@drawable/arrow_drop_up"
+             android:tint="@color/colorAccent"
+             android:id="@+id/feed_sheet_indicator"
+             app:layout_constraintStart_toStartOf="parent"
+             app:layout_constraintEnd_toEndOf="parent"/>
+    
+            <ProgressBar
+             android:layout_width = "60dp"
+             android:layout_height = "60dp"
+             android:padding="8dp"
+             android:id="@+id/feed_sheet_progress"
+             app:layout_constraintStart_toStartOf="parent"
+             app:layout_constraintEnd_toStartOf="@id/feed_sheet_progress_text"
+             app:layout_constraintHorizontal_chainStyle="packed"
+             app:layout_constraintTop_toBottomOf="@id/feed_sheet_indicator"/>
+    
+            <TextView
+             android:id="@+id/feed_sheet_progress_text"
+             android:layout_width = "wrap_content" android:layout_height = "wrap_content"
+             android:text="Fetching Locality Reports"
+             app:layout_constraintTop_toBottomOf="@id/feed_sheet_indicator"
+             app:layout_constraintStart_toEndOf="@id/feed_sheet_progress"
+             app:layout_constraintBottom_toBottomOf="@id/feed_sheet_progress"
+             app:layout_constraintEnd_toEndOf="parent"/>
+    
+            <android.support.v7.widget.RecyclerView
+             android:layout_width = "match_parent"
+             android:visibility="gone"
+             android:layout_height = "wrap_content"
+             android:id="@+id/feed_sheet_recycler"
+             app:layout_constraintTop_toBottomOf="@id/feed_sheet_indicator"/>
+            
+        </android.support.constraint.ConstraintLayout>
+    
+    </android.support.v4.widget.NestedScrollView>
 
-    </android.support.constraint.ConstraintLayout>
-
-</android.support.constraint.ConstraintLayout>
+</android.support.design.widget.CoordinatorLayout>

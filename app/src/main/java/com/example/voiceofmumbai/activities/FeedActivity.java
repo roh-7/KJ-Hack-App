@@ -1,39 +1,14 @@
 package com.example.voiceofmumbai.activities;
 
-import android.Manifest;
-import android.content.pm.PackageManager;
-import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
 import android.os.Bundle;
-import android.os.Looper;
 import android.support.annotation.NonNull;
-import android.support.constraint.ConstraintLayout;
-import android.support.design.widget.BottomSheetBehavior;
-import android.support.transition.TransitionManager;
 import android.support.design.widget.BottomNavigationView;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.FrameLayout;
-import android.widget.ProgressBar;
-
-import com.example.voiceofmumbai.R;
-import com.mapfit.android.MapView;
-import com.mapfit.android.MapfitMap;
-import com.mapfit.android.OnMapReadyCallback;
-import com.mapfit.android.annotations.Marker;
-import com.mapfit.android.annotations.MarkerOptions;
-import com.mapfit.android.annotations.callback.OnMarkerAddedCallback;
-import com.mapfit.android.geometry.LatLng;
-import com.mapfit.android.location.LocationPriority;
+import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import com.example.voiceofmumbai.R;
 import com.example.voiceofmumbai.fragment.FeedFragment;
@@ -43,13 +18,28 @@ import com.example.voiceofmumbai.fragment.ProfileFragment;
 public class FeedActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener{
 
     private BottomNavigationView bottomBar;
+    private Toolbar toolbar;
+    private TextView toolbarLocalityText, toolbarExtensionText;
+    private FeedFragment feedFragment;
+    private MapFragment mapFragment;
+    private ProfileFragment profileFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feed);
         bottomBar = findViewById(R.id.bottom_bar);
+        toolbar = findViewById(R.id.toolbar);
+        feedFragment = new FeedFragment();
+        mapFragment = new MapFragment();
+        profileFragment = new ProfileFragment();
+        toolbarExtensionText = toolbar.findViewById(R.id.toolbar_title_extension);
+        toolbarLocalityText = toolbar.findViewById(R.id.toolbar_title_locality);
         bottomBar.setOnNavigationItemSelectedListener(this);
+    }
+
+    public void setLocality(String locality) {
+    	toolbarLocalityText.setText(locality);
     }
 
 	@Override
@@ -59,15 +49,15 @@ public class FeedActivity extends AppCompatActivity implements BottomNavigationV
 		switch(menuItem.getItemId())
 		{
 			case R.id.menu_feed:
-				fragment = new FeedFragment();
+				fragment = feedFragment;
 				break;
 
 			case R.id.menu_map:
-				fragment = new MapFragment();
+				fragment = mapFragment;
 				break;
 
 			case R.id.menu_profile:
-				fragment = new ProfileFragment();
+				fragment = profileFragment;
 				break;
 		}
 		if(fragment!=null)
@@ -75,5 +65,23 @@ public class FeedActivity extends AppCompatActivity implements BottomNavigationV
 			getSupportFragmentManager().beginTransaction().replace(R.id.container,fragment).commit();
 		}
 		return true;
+	}
+
+	public void showMapElementsOnToolbar() {
+		if(toolbarLocalityText != null)
+		{
+			toolbarExtensionText.setVisibility(View.VISIBLE);
+			toolbarLocalityText.setVisibility(View.VISIBLE);
+		}
+
+	}
+
+	public void hideMapElementsOnToolbar() {
+		if(toolbarLocalityText != null)
+		{
+			toolbarExtensionText.setVisibility(View.GONE);
+			toolbarLocalityText.setVisibility(View.GONE);
+		}
+
 	}
 }

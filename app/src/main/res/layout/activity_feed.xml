@@ -24,18 +24,38 @@
                 android:textStyle="bold"
                 android:textSize="18sp"
                 android:textColor="#000"
+                android:id="@+id/toolbar_title"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/toolbar_title_extension"
+                app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent" />
 
-            <ImageView
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:padding="4dp"
-                android:src="@mipmap/ic_launcher"
-                android:visibility="gone" />
+            <TextView
+             android:padding="4dp"
+             android:layout_width = "wrap_content" android:layout_height = "wrap_content"
+             android:text="•"
+             android:textSize="18sp"
+             app:layout_constraintStart_toEndOf="@id/toolbar_title"
+             app:layout_constraintEnd_toStartOf="@id/toolbar_title_locality"
+             android:visibility="gone"
+             app:layout_constraintTop_toTopOf="parent"
+             android:id="@+id/toolbar_title_extension"
+             app:layout_constraintBottom_toBottomOf="parent"/>
 
+            <TextView
+             android:visibility="gone"
+             android:textSize="18sp"
+             android:layout_width = "wrap_content" android:layout_height = "wrap_content"
+             android:text="Chembur"
+             android:textColor="@color/colorAccent"
+             android:textStyle="bold"
+             android:id="@+id/toolbar_title_locality"
+             android:fontFamily="sans-serif-condensed"
+             app:layout_constraintTop_toTopOf="parent"
+             app:layout_constraintBottom_toBottomOf="parent"
+             app:layout_constraintStart_toEndOf="@id/toolbar_title_extension"
+             app:layout_constraintEnd_toEndOf="parent"/>
         </android.support.constraint.ConstraintLayout>
 
     </android.support.v7.widget.Toolbar>
