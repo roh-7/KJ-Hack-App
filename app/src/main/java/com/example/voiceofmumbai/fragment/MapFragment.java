@@ -2,6 +2,7 @@ package com.example.voiceofmumbai.fragment;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
@@ -11,6 +12,7 @@ import android.os.Looper;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetBehavior;
+import android.support.design.widget.FloatingActionButton;
 import android.support.transition.TransitionManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
@@ -18,16 +20,25 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.voiceofmumbai.R;
 import com.example.voiceofmumbai.activities.FeedActivity;
+import com.example.voiceofmumbai.activities.IssueCreationActivity;
 import com.example.voiceofmumbai.adapter.FeedAdapter;
 import com.example.voiceofmumbai.model.FeedItem;
+import com.example.voiceofmumbai.utils.Constants;
 import com.example.voiceofmumbai.utils.UtilityMethods;
 import com.mapfit.android.MapView;
 import com.mapfit.android.MapfitMap;
@@ -38,6 +49,10 @@ import com.mapfit.android.geocoder.GeocoderCallback;
 import com.mapfit.android.geocoder.model.Address;
 import com.mapfit.android.geometry.LatLng;
 import com.mapfit.android.location.LocationPriority;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -119,6 +134,8 @@ public class MapFragment extends Fragment
 	private RecyclerView feedRecycler;
 	private NestedScrollView nsv;
 	private ArrayList<FeedItem> feeds = new ArrayList<>();
+	private RequestQueue requestQueue;
+	private FloatingActionButton fab;
 
 	@Nullable
 	@Override
@@ -132,6 +149,16 @@ public class MapFragment extends Fragment
 		nsv = view.findViewById(R.id.feed_sheet);
 		bottomSheetBehavior = BottomSheetBehavior.from(nsv);
 		feedRecycler = view.findViewById(R.id.feed_sheet_recycler);
+		fab = view.findViewById(R.id.create_report_fab);
+
+		fab.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view)
+			{
+				startActivity(new Intent(getContext(), IssueCreationActivity.class));
+			}
+		});
+		requestQueue = Volley.newRequestQueue(getContext());
 
 		if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 			if (!ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION)) {
@@ -159,8 +186,68 @@ public class MapFragment extends Fragment
 
 							MapFragment.this.mapfitMap.addMarker(new MarkerOptions().position(MapFragment.this.mapfitMap.getCenter()));
 
-							// TODO Make this call under the API Success
-							onAPISuccess();
+							LatLng ne = MapFragment.this.mapfitMap.getLatLngBounds().getNorthEast();
+							LatLng sw = MapFragment.this.mapfitMap.getLatLngBounds().getSouthWest();
+
+							JSONObject params = new JSONObject();
+							try
+							{
+								params.put("lat_min", sw.getLat());
+								params.put("lat_max", ne.getLat());
+								params.put("long_min", sw.getLng());
+								params.put("long_max", ne.getLng());
+							}
+							catch (JSONException e)
+							{
+								e.printStackTrace();
+							}
+
+							JsonObjectRequest request = new JsonObjectRequest(
+									Request.Method.POST,
+									Constants.API_URL + "nearby",
+									params,
+									new Response.Listener<JSONObject>()
+									{
+										@Override
+										public void onResponse(JSONObject response)
+										{
+											Log.d("LULZ", response.toString());
+											JSONArray postArray = response.optJSONArray("post");
+											for(int i = 0; i < postArray.length(); i++) {
+												JSONObject postObject = postArray.optJSONObject(i);
+												FeedItem item = new FeedItem(
+														postObject.optString("id"),
+														postObject.optString("title"),
+														postObject.optString("content"),
+														postObject.optString("content_type"),
+														postObject.optString("category"),
+														postObject.optString("ward"),
+														postObject.optString("status"),
+														postObject.optString("status_note"),
+														postObject.optString("timestamp"),
+														postObject.optString("user_name"),
+														postObject.optDouble("location_lat"),
+														postObject.optDouble("location_log")
+
+														);
+												Log.d("LULZ", item.getCategory());
+												feeds.add(item);
+												MapFragment.this.mapfitMap.addMarker(new MarkerOptions().position(new LatLng(item.getLocation_lat(), item.getLocation_long())));
+											}
+											onAPISuccess();
+											Log.d("LULZ", "Success " + feeds.size());
+										}
+									},
+									new Response.ErrorListener() {
+										@Override
+										public void onErrorResponse(VolleyError error)
+										{
+											error.printStackTrace();
+										}
+									}
+							);
+
+							requestQueue.add(request);
 
 						}
 
@@ -190,6 +277,7 @@ public class MapFragment extends Fragment
 	{
 		if(getContext() == null) return;
 		bottomSheetBehavior.setPeekHeight((int) UtilityMethods.convertDpToPixel(16.0f, getContext()) + progressBar.getHeight());
+		bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
 
 		new Geocoder().reverseGeocode(MapFragment.this.mapfitMap.getCenter(), new GeocoderCallback() {
 			@Override

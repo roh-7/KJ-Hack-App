@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+ xmlns:android = "http://schemas.android.com/apk/res/android"
+ xmlns:app = "http://schemas.android.com/apk/res-auto"
+ xmlns:tools = "http://schemas.android.com/tools"
+ android:layout_width = "match_parent"
+ android:layout_height = "match_parent"
+ android:orientation="vertical"
+ android:padding="16dp"
+ android:gravity="center_vertical"
+ tools:context = ".activities.IssueCreationActivity">
+
+	<TextView
+	 android:layout_width = "wrap_content" android:layout_height = "wrap_content"
+	 android:text="Create a Complaint"
+	 android:textSize="24sp"
+	 android:textStyle="bold"
+	 android:textColor="#000"
+	 android:paddingTop="12dp"
+	 android:paddingBottom="24dp"/>
+	
+
+	<android.support.design.widget.TextInputEditText
+	 android:layout_width = "match_parent" android:layout_height = "wrap_content"
+	 android:hint="Title"
+	 android:id="@+id/create_report_title"/>
+	
+	<android.support.design.widget.TextInputEditText
+	 android:layout_width = "match_parent" android:layout_height = "wrap_content"
+	 android:id="@+id/create_report_content"
+	 android:hint="Content"/>
+	
+	<android.support.design.widget.TextInputEditText
+	 android:layout_width = "match_parent" android:layout_height = "wrap_content"
+	 android:id="@+id/create_report_category"
+	 android:hint="Category"/>
+	
+	<LinearLayout
+	 android:layout_width = "match_parent" android:layout_height = "wrap_content"
+	 android:layout_marginTop="8dp"
+	 android:orientation="horizontal"
+	 android:gravity="center_vertical">
+
+		<TextView
+		 android:layout_width = "wrap_content" android:layout_height = "wrap_content"
+		 android:id="@+id/location_Text"
+		 android:text="Getting Current Location"/>
+
+		<ImageView
+		 
+		 android:layout_width = "wrap_content" android:layout_height = "wrap_content"
+		 android:padding="8dp"
+		 android:layout_margin="8dp"
+		 android:background="@drawable/card_round"
+		 android:src="@drawable/ic_location_on_black_24dp"
+		 android:id="@+id/check_location_button"
+		 />
+
+	</LinearLayout>
+
+	<LinearLayout
+	 android:layout_width = "match_parent" android:layout_height = "wrap_content"
+	 android:gravity="end"
+	 android:orientation="horizontal">
+
+			<ProgressBar
+			 android:layout_width = "24dp" android:layout_height = "24dp"
+			 android:id="@+id/create_report_progress"
+			 android:layout_gravity="center_vertical"
+			 android:layout_marginEnd="8dp"
+			 android:visibility="gone"/>
+
+			<Button
+			 android:id="@+id/create_report_submit_button"
+			 android:layout_width = "wrap_content" android:layout_height = "wrap_content"
+			 android:layout_marginTop="8dp"
+			 android:layout_gravity="end"
+			 style="@style/Widget.AppCompat.Button.Colored"
+			 android:text="Submit"/>
+
+	</LinearLayout>
+
+</LinearLayout>

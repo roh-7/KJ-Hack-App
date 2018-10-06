@@ -36,6 +36,7 @@ dependencies {
     implementation 'com.apollographql.apollo:apollo-runtime:0.4.4'
     implementation 'com.mapfit:android-sdk:2.1.1'
     implementation 'com.google.code.gson:gson:2.8.5'
+    implementation 'com.android.volley:volley:1.1.1'
 }
 
 apply plugin: 'com.google.gms.google-services'
