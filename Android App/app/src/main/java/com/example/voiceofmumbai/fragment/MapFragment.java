@@ -238,8 +238,9 @@ public class MapFragment extends Fragment
 												Log.d("LULZW", item.getLocation_lat() + "-_-" + item.getLocation_long());
 												LatLng l1 = new LatLng(item.getLocation_lat(), item.getLocation_long());
 												Log.d("LULZ", l1.getLat() + "::" + l1.getLng());
-												LatLng l = new LatLng(19.0827, 72.9184);
-												MarkerOptions options = new MarkerOptions().position(l);
+												MarkerOptions options = new MarkerOptions().position(l1).icon(
+
+														item.getStatus().equals("0") ? R.drawable.ic_error_black_24dp : R.drawable.ic_check_circle_black_24dp);
 												MapFragment.this.mapfitMap.addMarker(options, new OnMarkerAddedCallback() {
 													@Override
 													public void onMarkerAdded(Marker marker)
