@@ -1,8 +1,21 @@
 # NWA
+
 Submission for KJSCE Hackathon 2018 [Voices of Mumbai]
 
 ## VoicesOfMumbai
-The android app is to be used by the users to voice the problems they are facing. The users get a feed of problems reported by other users and also problems repoted/acknowledged by the authorities. Authenticating has been implemented using the user's phone number and an OTP being sent to the user. The user can also see the problems being reported locality wise marked on the map of Mumbai(the city he resides in). This would serve as a platform for the authorities as well as residents to monitor their locality. The locality of the user is taken from his current location while posting a complaint regarding the problem he/she is facing.
+
+The Android App **VoicesOfMumbai** is to be used by the users to voice the problems they're facing in their daily routine.
+
+**Features:**
+
+* Users can post problems pertaining to their Locality
+* Official Authorities monitor these reports and provide status updates related to a problem.
+* Problem Heatmap
+    - Users are provided with a Map, which contains location markers where a problem is reported by the User.
+    - Users get an overview of problems which are located in, as well as around the locality
+* User Authenticity: Users have to provide their Mobile Number, through which an OTP verification is done.
+
+This project would serve as a platform for the authorities as well as residents to monitor their locality. It also acts as an Indicator for other Users, who may think of residing in the Locality. The locality of the user is taken from his current location while posting a complaint regarding the problem he/she is facing.
 
 ## Screenshots
 <p float="left">
@@ -11,9 +24,8 @@ The android app is to be used by the users to voice the problems they are facing
 <img height="350" src="/static/map1.png"/>
 </p>
 
-## Video(Demo)
+## Video (Demo)
 <img height="350" src="/static/video.gif"/>
-
 
 ## Setup
 
